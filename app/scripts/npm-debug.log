@@ -1,0 +1,211 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'grunt-browser-sync',
+1 verbose cli   '--save-dev' ]
+2 info using npm@2.7.5
+3 info using node@v0.12.2
+4 verbose node symlink /usr/local/bin/node
+5 warn package.json collage@1.0.0 No repository field.
+6 warn package.json collage@1.0.0 No README data
+7 silly cache add args [ 'grunt-browser-sync', null ]
+8 verbose cache add spec grunt-browser-sync
+9 silly cache add parsed spec { raw: 'grunt-browser-sync',
+9 silly cache add   scope: null,
+9 silly cache add   name: 'grunt-browser-sync',
+9 silly cache add   rawSpec: '',
+9 silly cache add   spec: '*',
+9 silly cache add   type: 'range' }
+10 verbose addNamed grunt-browser-sync@*
+11 silly addNamed semver.valid null
+12 silly addNamed semver.validRange *
+13 silly addNameRange { name: 'grunt-browser-sync', range: '*', hasData: false }
+14 silly mapToRegistry name grunt-browser-sync
+15 silly mapToRegistry using default registry
+16 silly mapToRegistry registry https://registry.npmjs.org/
+17 silly mapToRegistry uri https://registry.npmjs.org/grunt-browser-sync
+18 verbose addNameRange registry:https://registry.npmjs.org/grunt-browser-sync not in flight; fetching
+19 verbose request uri https://registry.npmjs.org/grunt-browser-sync
+20 verbose request no auth needed
+21 info attempt registry request try #1 at 12:08:55
+22 verbose request id 50d9a4acae8194fa
+23 verbose etag "8SOUR73W0YGBCFO3K077GV32E"
+24 http request GET https://registry.npmjs.org/grunt-browser-sync
+25 http 200 https://registry.npmjs.org/grunt-browser-sync
+26 silly get cb [ 200,
+26 silly get   { server: 'CouchDB/1.6.1 (Erlang OTP/R16B03)',
+26 silly get     etag: '"2S1A6CYN07JSM2HY026HYPEQN"',
+26 silly get     'content-type': 'application/json',
+26 silly get     'content-encoding': 'gzip',
+26 silly get     'cache-control': 'max-age=300',
+26 silly get     'content-length': '8507',
+26 silly get     'accept-ranges': 'bytes',
+26 silly get     date: 'Mon, 15 Aug 2016 06:37:00 GMT',
+26 silly get     via: '1.1 varnish',
+26 silly get     age: '0',
+26 silly get     connection: 'keep-alive',
+26 silly get     'x-served-by': 'cache-sin6921-SIN',
+26 silly get     'x-cache': 'MISS',
+26 silly get     'x-cache-hits': '0',
+26 silly get     'x-timer': 'S1471243019.695174,VS0,VE520',
+26 silly get     vary: 'Accept-Encoding' } ]
+27 verbose get saving grunt-browser-sync to /Users/prashank/.npm/registry.npmjs.org/grunt-browser-sync/.cache.json
+28 silly addNameRange number 2 { name: 'grunt-browser-sync', range: '*', hasData: true }
+29 silly addNameRange versions [ 'grunt-browser-sync',
+29 silly addNameRange   [ '0.2.0',
+29 silly addNameRange     '0.2.1',
+29 silly addNameRange     '0.2.2',
+29 silly addNameRange     '0.2.3',
+29 silly addNameRange     '0.2.4',
+29 silly addNameRange     '0.2.5',
+29 silly addNameRange     '0.2.6',
+29 silly addNameRange     '0.2.7',
+29 silly addNameRange     '0.3.0',
+29 silly addNameRange     '0.3.1',
+29 silly addNameRange     '0.3.2',
+29 silly addNameRange     '0.3.3',
+29 silly addNameRange     '0.3.4',
+29 silly addNameRange     '0.3.5',
+29 silly addNameRange     '0.3.7',
+29 silly addNameRange     '0.3.8',
+29 silly addNameRange     '0.3.9',
+29 silly addNameRange     '0.4.0',
+29 silly addNameRange     '0.4.1',
+29 silly addNameRange     '0.4.2',
+29 silly addNameRange     '0.4.3',
+29 silly addNameRange     '0.4.4',
+29 silly addNameRange     '0.4.5',
+29 silly addNameRange     '0.4.6',
+29 silly addNameRange     '0.4.7',
+29 silly addNameRange     '0.4.8',
+29 silly addNameRange     '0.4.9',
+29 silly addNameRange     '0.5.0',
+29 silly addNameRange     '0.5.1',
+29 silly addNameRange     '0.5.2',
+29 silly addNameRange     '0.5.3',
+29 silly addNameRange     '0.5.4',
+29 silly addNameRange     '0.5.6',
+29 silly addNameRange     '0.5.7',
+29 silly addNameRange     '0.5.8',
+29 silly addNameRange     '0.5.9',
+29 silly addNameRange     '0.6.0',
+29 silly addNameRange     '0.6.1',
+29 silly addNameRange     '0.6.2',
+29 silly addNameRange     '0.7.0',
+29 silly addNameRange     '0.7.1',
+29 silly addNameRange     '0.7.2',
+29 silly addNameRange     '0.7.3',
+29 silly addNameRange     '0.7.4',
+29 silly addNameRange     '0.7.5',
+29 silly addNameRange     '0.7.6',
+29 silly addNameRange     '0.7.7',
+29 silly addNameRange     '0.8.0',
+29 silly addNameRange     '0.8.2',
+29 silly addNameRange     '0.9.1',
+29 silly addNameRange     '1.1.0',
+29 silly addNameRange     '1.1.2',
+29 silly addNameRange     '1.2.1',
+29 silly addNameRange     '1.3.0',
+29 silly addNameRange     '1.3.2',
+29 silly addNameRange     '1.3.5',
+29 silly addNameRange     '1.3.6',
+29 silly addNameRange     '1.3.7',
+29 silly addNameRange     '1.5.2',
+29 silly addNameRange     '1.5.3',
+29 silly addNameRange     '1.9.1',
+29 silly addNameRange     '2.0.0',
+29 silly addNameRange     '2.1.0',
+29 silly addNameRange     '2.1.1',
+29 silly addNameRange     '2.1.2',
+29 silly addNameRange     '1.9.2',
+29 silly addNameRange     '2.1.3',
+29 silly addNameRange     '2.2.0' ] ]
+30 verbose addNamed grunt-browser-sync@2.2.0
+31 silly addNamed semver.valid 2.2.0
+32 silly addNamed semver.validRange 2.2.0
+33 silly mapToRegistry name grunt-browser-sync
+34 silly mapToRegistry using default registry
+35 silly mapToRegistry registry https://registry.npmjs.org/
+36 silly mapToRegistry uri https://registry.npmjs.org/grunt-browser-sync
+37 verbose addRemoteTarball https://registry.npmjs.org/grunt-browser-sync/-/grunt-browser-sync-2.2.0.tgz not in flight; adding
+38 verbose addRemoteTarball [ 'https://registry.npmjs.org/grunt-browser-sync/-/grunt-browser-sync-2.2.0.tgz',
+38 verbose addRemoteTarball   'a0e9c1fd1ccb5c454c25ec5170113ffff06a4772' ]
+39 info retry fetch attempt 1 at 12:08:58
+40 info attempt registry request try #1 at 12:08:58
+41 http fetch GET https://registry.npmjs.org/grunt-browser-sync/-/grunt-browser-sync-2.2.0.tgz
+42 http fetch 200 https://registry.npmjs.org/grunt-browser-sync/-/grunt-browser-sync-2.2.0.tgz
+43 silly fetchAndShaCheck shasum a0e9c1fd1ccb5c454c25ec5170113ffff06a4772
+44 verbose addTmpTarball /var/folders/x5/p9h8pn5d1ss0jnc2pz198pq80000gp/T/npm-12815-7a619b81/registry.npmjs.org/grunt-browser-sync/-/grunt-browser-sync-2.2.0.tgz not in flight; adding
+45 verbose addTmpTarball already have metadata; skipping unpack for grunt-browser-sync@2.2.0
+46 silly cache afterAdd grunt-browser-sync@2.2.0
+47 verbose afterAdd /Users/prashank/.npm/grunt-browser-sync/2.2.0/package/package.json not in flight; writing
+48 verbose afterAdd /Users/prashank/.npm/grunt-browser-sync/2.2.0/package/package.json written
+49 silly install resolved [ { name: 'grunt-browser-sync',
+49 silly install resolved     description: 'Live CSS reload & Browser Syncing',
+49 silly install resolved     version: '2.2.0',
+49 silly install resolved     homepage: 'https://github.com/shakyshane/grunt-browser-sync',
+49 silly install resolved     author: { name: 'Shane Osbourne' },
+49 silly install resolved     repository:
+49 silly install resolved      { type: 'git',
+49 silly install resolved        url: 'git://github.com/shakyshane/grunt-browser-sync.git' },
+49 silly install resolved     bugs: { url: 'https://github.com/shakyshane/grunt-browser-sync/issues' },
+49 silly install resolved     licenses: [ [Object] ],
+49 silly install resolved     main: 'Gruntfile.js',
+49 silly install resolved     engines: { node: '>=0.10.0' },
+49 silly install resolved     scripts: { test: 'jshint tasks/*.js' },
+49 silly install resolved     dependencies: { 'browser-sync': '^2.6.4' },
+49 silly install resolved     keywords:
+49 silly install resolved      [ 'gruntplugin',
+49 silly install resolved        'live reload',
+49 silly install resolved        'inject styles',
+49 silly install resolved        'style injector',
+49 silly install resolved        'auto refresh' ],
+49 silly install resolved     devDependencies:
+49 silly install resolved      { grunt: '^0.4.5',
+49 silly install resolved        'grunt-autoprefixer': '^3.0.0',
+49 silly install resolved        'grunt-cli': '^0.1.13',
+49 silly install resolved        'grunt-concurrent': '^1.0.0',
+49 silly install resolved        'grunt-contrib-connect': '^0.9.0',
+49 silly install resolved        'grunt-contrib-sass': '^0.9.2',
+49 silly install resolved        'grunt-contrib-watch': '^0.6.1',
+49 silly install resolved        jshint: '^2.6.3' },
+49 silly install resolved     gitHead: 'e5a59cbf51e5132f4c2972f25380fa93c5a99544',
+49 silly install resolved     _id: 'grunt-browser-sync@2.2.0',
+49 silly install resolved     _shasum: 'a0e9c1fd1ccb5c454c25ec5170113ffff06a4772',
+49 silly install resolved     _from: 'grunt-browser-sync@*',
+49 silly install resolved     _npmVersion: '2.7.3',
+49 silly install resolved     _nodeVersion: '0.10.26',
+49 silly install resolved     _npmUser: { name: 'shakyshane', email: 'shakyshane@gmail.com' },
+49 silly install resolved     dist:
+49 silly install resolved      { shasum: 'a0e9c1fd1ccb5c454c25ec5170113ffff06a4772',
+49 silly install resolved        tarball: 'https://registry.npmjs.org/grunt-browser-sync/-/grunt-browser-sync-2.2.0.tgz' },
+49 silly install resolved     maintainers: [ [Object] ],
+49 silly install resolved     directories: {},
+49 silly install resolved     _resolved: 'https://registry.npmjs.org/grunt-browser-sync/-/grunt-browser-sync-2.2.0.tgz' } ]
+50 info install grunt-browser-sync@2.2.0 into /Users/prashank/git/collage
+51 info installOne grunt-browser-sync@2.2.0
+52 verbose installOne of grunt-browser-sync to /Users/prashank/git/collage not in flight; installing
+53 warn locking Error: EACCES, open '/Users/prashank/.npm/_locks/grunt-browser-sync-07ad425bc0d2cf8d.lock'
+53 warn locking     at Error (native)
+53 warn locking  /Users/prashank/.npm/_locks/grunt-browser-sync-07ad425bc0d2cf8d.lock failed { [Error: EACCES, open '/Users/prashank/.npm/_locks/grunt-browser-sync-07ad425bc0d2cf8d.lock']
+53 warn locking   errno: -13,
+53 warn locking   code: 'EACCES',
+53 warn locking   path: '/Users/prashank/.npm/_locks/grunt-browser-sync-07ad425bc0d2cf8d.lock' }
+54 verbose stack Error: Attempt to unlock /Users/prashank/git/collage/node_modules/grunt-browser-sync, which hasn't been locked
+54 verbose stack     at unlock (/usr/local/lib/node_modules/npm/lib/utils/locker.js:66:11)
+54 verbose stack     at cb (/usr/local/lib/node_modules/npm/lib/install.js:1004:5)
+54 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:1008:20
+54 verbose stack     at /usr/local/lib/node_modules/npm/lib/utils/locker.js:40:9
+54 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+54 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+54 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+55 verbose cwd /Users/prashank/git/collage/app/scripts
+56 error Darwin 14.5.0
+57 error argv "node" "/usr/local/bin/npm" "install" "grunt-browser-sync" "--save-dev"
+58 error node v0.12.2
+59 error npm  v2.7.5
+60 error Attempt to unlock /Users/prashank/git/collage/node_modules/grunt-browser-sync, which hasn't been locked
+61 error If you need help, you may report this error at:
+61 error     <https://github.com/npm/npm/issues>
+62 verbose exit [ 1, true ]
