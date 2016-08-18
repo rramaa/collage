@@ -3,7 +3,7 @@
         "CONTAINER": "[data-container]",
         "THUMBNAILS": "[data-tumbnails]",
         "DRAW-AREA": "[data-draw-area]",
-        "THUMB-ELEMENT": "[data-tumbnails] [data-resize]",
+        "THUMB-ELEMENT": "[data-tumbnails] [data-drag]",
         "DRAW-ELEMENT": "[data-draw-area] [data-drag]",
         "DRAG": "[data-drag]",
         "ROTATE": "[data-rotate]",

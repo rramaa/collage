@@ -16,19 +16,21 @@ require.config({
     },
     "shim": {
         "t3": {
-            "deps": ["jquery"]
+            "deps": ["jquery"],
+            "exports": "$"
         },
         "jqueryUI": {
+            "deps": ["jquery"],
+            "exports": "$.ui"
+        },
+        "bootstrap": {
             "deps": ["jquery"]
         },
-        "bootstrap":{
-            "deps": ["jquery"]
+        "jqueryUIRotate": {
+            "deps": ["jquery", "jqueryUI"]
         },
-        "jqueryUIRotate":{
-            "deps": ["jquery","jqueryUI"]
-        },
-        "resizePatch":{
-            "deps": ["jquery","jqueryUI"]
+        "resizePatch": {
+            "deps": ["jquery", "jqueryUI"]
         }
     },
     "doT": {

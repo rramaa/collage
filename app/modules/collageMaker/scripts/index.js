@@ -18,11 +18,12 @@ define([
                     "revert": "invalid",
                     "containment": "document",
                     "helper": "clone",
+                    "scroll": false,
                     "cursor": "move"
                 },
                 "collageElement": {
                     "cursor": "move",
-                    // "containment": "document",
+                    "scroll": false,
                     "stack": config.selector["DRAW-ELEMENT"]
                 },
                 "drawarea": {
@@ -48,7 +49,10 @@ define([
 
                 },
                 "collageElement": {
-                    "handles": 'ne, nw, se, sw, n, w, s, e'
+                    "handles": 'ne, nw, se, sw, n, w, s, e',
+                    "start": function(event, ui) {
+                        ui.element.css('position', 'absolute');
+                    }
                 },
                 "draw-area": {
 
@@ -93,6 +97,7 @@ define([
             let $resizeElement = $(config.selector["RESIZE"], $item);
             let $rotateElement = $(config.selector["ROTATE"], $item);
             let $dragElement = $item;
+            // $rotateElement = $resizeElement = $item;
             $item.fadeOut(() => {
                 $item.remove().appendTo($drawArea).fadeIn();
                 _bindUIEvent('drag', $dragElement, uiconfig.drag.collageElement);
@@ -102,16 +107,17 @@ define([
             });
         }
 
-        function _keyuphandler(event){
-            if(event.which == 8){
+        function _keyuphandler(event) {
+            if (event.which == 8) {
                 _recycleImage()
             }
         }
 
-        function _bindKeyEvent(){
+        function _bindKeyEvent() {
             $(document).on('keyup', _keyuphandler)
         }
-        function _unbindKeyEvent(){
+
+        function _unbindKeyEvent() {
             $(document).off('keyup', _keyuphandler)
         }
 
@@ -122,7 +128,7 @@ define([
         }
 
         function _removeSelection(el) {
-            $('.'+config.classes.selected, $drawArea).removeClass('selected').blur();
+            $('.' + config.classes.selected, $drawArea).removeClass('selected').blur();
         }
 
         function _selectElement(el) {
@@ -131,7 +137,7 @@ define([
         }
 
         function _recycleImage() {
-            let $item = $('.'+config.classes.selected, $drawArea).closest(config.selector["DRAG"]);
+            let $item = $('.' + config.classes.selected, $drawArea).closest(config.selector["DRAG"]);
             $item.fadeOut(function() {
                 let imageUrl = $item.remove().find('img').attr('src'),
                     clone = $('#clone_element').clone();
@@ -174,7 +180,6 @@ define([
             switch (elementType) {
                 case "collage-element":
                     _selectElement(element);
-                    // _recycleImage()
                     break;
                 case "save":
                     html2canvas($drawArea, {

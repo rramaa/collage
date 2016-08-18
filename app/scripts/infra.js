@@ -8,7 +8,7 @@ define('infra',[
     'jqueryUI',
     'jqueryUIRotate',
     'html2canvas',
-    // 'resizePatch'
+    'resizePatch'
 ], function($,Box,doT) {
 	window.Box = Box;
     window.doT = doT;

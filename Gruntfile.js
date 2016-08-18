@@ -14,7 +14,9 @@ module.exports = function(grunt) {
     require('time-grunt')(grunt);
 
     // Automatically load required grunt tasks
-    require('jit-grunt')(grunt);
+    require('jit-grunt')(grunt, {
+        useminPrepare: 'grunt-usemin'
+    });
 
 
     // Configurable paths
@@ -78,8 +80,8 @@ module.exports = function(grunt) {
                 src: [
                     '<%= config.dist %>/scripts/{,*/**/}*.js',
                     '<%= config.dist %>/modules/{,*/**/}*.js',
-                    '<%= config.dist %>/styles/{,*/}*.css',
-                    '<%= config.dist %>/images/{,*/}*.*'
+                    '<%= config.dist %>/styles/css/*.css'
+                    // '<%= config.dist %>/images/{,*/}*.*'
                 ]
             }
         },
@@ -92,7 +94,9 @@ module.exports = function(grunt) {
                     cwd: '<%= config.app %>',
                     dest: '<%= config.dist %>',
                     src: [
-                        'images/*'
+                        'images/*',
+                        '*.html',
+                        'styles/{,**/}*.css'
                     ]
                 }]
             },
@@ -122,6 +126,21 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        useminPrepare: {
+            html: ['<%= config.dist %>/*.html'],
+            options: {
+                root: '<%= config.dist %>',
+                dest: '<%= config.dist %>',
+                flow: {
+                    html: {
+                        steps: {
+                            css: ['concat', 'cssmin']
+                        },
+                        post: {}
+                    }
+                }
+            }
+        },
         watch: {
             js: {
                 options: {
@@ -136,16 +155,8 @@ module.exports = function(grunt) {
                 tasks: ['clean:client', 'copy:tmpDev', 'babel']
             }
         },
-        concurrent: {
-            copy: [
-                'copy:tmpProd'
-            ],
-            compile: [
-                'babel'
-            ]
-        },
         usemin: {
-            html: ['<%= config.serverDist %>/templates/*.marko', '<%= config.serverDist %>/routes/views/*.marko'],
+            html: ['<%= config.dist %>/*.html'],
             options: {
                 assetsDirs: [
                     '<%= config.dist %>'
@@ -162,8 +173,12 @@ module.exports = function(grunt) {
                     dir: config.dist,
                     findNestedDependencies: true,
                     skipDirOptimize: true,
+                    wrapShim: true,
                     modules: [{
-                        name: 'app'
+                        name: 'app',
+                        exclude: ['infra']
+                    }, {
+                        name: 'infra'
                     }]
                 }
             }
@@ -172,28 +187,27 @@ module.exports = function(grunt) {
 
             'dev': {
                 root: "<%= config.app %>",
-                port: 3000,
-
-                // the host ip address 
-                // If specified to, for example, "127.0.0.1" the server will 
-                // only be available on that ip. 
-                // Specify "0.0.0.0" to be available everywhere 
-                host: "0.0.0.0",
+                port: 3001,
                 showDir: true,
                 autoIndex: true,
                 ext: "html",
                 runInBackground: true,
-
-                // Tell grunt task to open the browser 
                 openBrowser: true,
-
-                // customize url to serve specific pages 
                 customPages: {
                     "/modules": "<%= config.tmp %>/modules",
                     "/scripts": "<%= config.tmp %>/scripts",
                     "/styles/images": "<%= config.app %>/images"
                 }
 
+            },
+            'prod': {
+                root: "<%= config.dist %>",
+                port: 3000,
+                showDir: true,
+                autoIndex: true,
+                ext: "html",
+                runInBackground: false,
+                openBrowser: true
             }
 
         },
@@ -222,21 +236,55 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.registerTask('updatePath', function() {
+        var path = config.dist + '/scripts/',
+            targetFilename = 'main',
+            targetFile = grunt.file.expand(path + targetFilename + '.*'),
+            content = grunt.file.read(targetFile[0]);
+
+        var i = null,
+            temp = null,
+            scripts = grunt.file.expand(config.dist + '/scripts/*.js');
+
+        var startFrom = content.indexOf('require.config');
+        var startingIndex = content.indexOf('(', startFrom) + 1,
+            endIndex = content.indexOf(')', startFrom),
+            obj = JSON.parse(content.slice(startingIndex, endIndex));
+
+
+        // adding other scripts path to require js config file
+        for (i = 0; i < scripts.length; i++) {
+            temp = scripts[i].split(config.dist + '/scripts/')[1].split('.');
+            obj.paths[temp[0]] = temp[1] !== 'js' ? 'scripts/'+temp[0] + '.' + temp[1] : 'scripts/'+temp[0];
+        }
+
+        content = content.slice(0, startingIndex) + JSON.stringify(obj) + content.slice(endIndex);
+        grunt.file.write(targetFile[0], content);
+    });
+
     grunt.registerTask('build', [
         'clean:dist',
-        'concurrent:copy',
-        'concurrent:compile',
+        'copy:tmpProd',
+        'babel',
         'requirejs',
         'copy:dist',
+        'useminPrepare',
+        'concat',
+        'cssmin',
         'filerev',
-        'usemin'
+        'usemin',
+        'updatePath'
     ]);
 
-    grunt.registerTask('serve', [
+    grunt.registerTask('prodserver', [
+        'http-server:prod'
+    ])
+
+    grunt.registerTask('localserver', [
         'clean:client',
         'copy:tmpDev',
         'babel',
-        'http-server',
+        'http-server:dev',
         // 'browserSync',
         'watch'
     ]);
