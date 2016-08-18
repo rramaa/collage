@@ -8,7 +8,8 @@
         "DRAG": "[data-drag]",
         "ROTATE": "[data-rotate]",
         "RESIZE": "[data-resize]",
-        "MODULE-ELEMENT": "[data-module='CollageMaker']"
+        "MODULE-ELEMENT": "[data-module='CollageMaker']",
+        "SAVE": "[data-type='save']"
     },
     "classes":{
         "selected": "selected",

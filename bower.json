@@ -17,11 +17,11 @@
   ],
   "dependencies": {
     "jquery": "~3.1.0",
-    "requirejs": "~2.2.0",
+    "requirejs": "~2.1.5",
     "t3js": "~2.6.0",
     "text": "requirejs-text#~2.0.15",
     "requirejs-doT": "~0.1.2",
-    "doT": "~1.0.1",
+    "doT": "~0.2.0",
     "requirejs-json": "~0.0.3",
     "jquery-ui": "~1.11.2",
     "jquery-ui-rotatable": "~1.0.1",

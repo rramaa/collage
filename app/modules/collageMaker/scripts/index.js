@@ -25,18 +25,9 @@ define([
                     "cursor": "move",
                     "scroll": false,
                     "stack": config.selector["DRAW-ELEMENT"]
-                },
-                "drawarea": {
-
                 }
             },
             "drop": {
-                "thumbnail": {
-
-                },
-                "collagElement": {
-
-                },
                 "drawarea": {
                     "accept": config.selector["THUMB-ELEMENT"],
                     "drop": function(event, ui) {
@@ -45,17 +36,11 @@ define([
                 }
             },
             "resize": {
-                "thumbnail": {
-
-                },
                 "collageElement": {
                     "handles": 'ne, nw, se, sw, n, w, s, e',
                     "start": function(event, ui) {
                         ui.element.css('position', 'absolute');
                     }
-                },
-                "draw-area": {
-
                 }
             }
         }
@@ -99,11 +84,12 @@ define([
             let $dragElement = $item;
             // $rotateElement = $resizeElement = $item;
             $item.fadeOut(() => {
-                $item.remove().appendTo($drawArea).fadeIn();
+                $item.remove().appendTo($drawArea).fadeIn().css({ "position": "absolute", "left": "35%", "top": "35%" });
                 _bindUIEvent('drag', $dragElement, uiconfig.drag.collageElement);
                 _bindUIEvent('resize', $resizeElement, uiconfig.resize.collageElement);
                 _bindUIEvent('rotate', $rotateElement);
                 _addDataType($resizeElement, config.collageElementDataType);
+                _selectElement($item);
             });
         }
 
@@ -127,13 +113,25 @@ define([
             $thumbDrag = $(config.selector["DRAG"], $thumbnails);
         }
 
-        function _removeSelection(el) {
+        function _removeSelection() {
             $('.' + config.classes.selected, $drawArea).removeClass('selected').blur();
+        }
+
+        function _getMaxZIndex() {
+            let maxZIndex = 0;
+            $.each($(config.selector["DRAG"], $drawArea), function() {
+                let zIndex = parseInt($(this).css('z-index'));
+                zIndex = !!zIndex ? zIndex : 0;
+                maxZIndex = maxZIndex > zIndex ? maxZIndex : zIndex
+            });
+            return parseInt(maxZIndex);
         }
 
         function _selectElement(el) {
             _removeSelection(el);
-            $(el).addClass(config.classes.selected).focus();
+            let newZindex = _getMaxZIndex() + 1;
+            el.closest(config.selector["DRAG"]).css('z-index', newZindex)
+            el.addClass(config.classes.selected).focus();
         }
 
         function _recycleImage() {
@@ -160,7 +158,6 @@ define([
         }
 
         function destroy() {
-            //clear all the binding and objects
             _unbindKeyEvent();
         }
 
@@ -170,25 +167,47 @@ define([
             }
         }
 
-        function downloadCanvas(link, canvas, filename) {
-            link.href = canvas.toDataURL();
-            link.download = filename;
+        function hackForBugInLibrary(add) {
+            if (add) {
+                $.each($(config.selector["RESIZE"], $drawArea), function() {
+                    let src = $(this).find('img').addClass(config.classes.hide).attr('src');
+                    $(this).css("backgroundImage", `url('${src}')`);
+                });
+            } else {
+                $.each($(config.selector["RESIZE"], $drawArea), function() {
+                    $(this).find('img').removeClass(config.classes.hide);
+                    $(this).css("backgroundImage", "none");
+                });
+            }
+        }
+
+        function _saveCollage() {
+            hackForBugInLibrary(true);
+            html2canvas($drawArea, {
+                onrendered: function(canvas) {
+                    _downloadCollage(canvas.toDataURL("image/png", 1.0), "collage.png");
+                    hackForBugInLibrary(false);
+                }
+            })
+        }
+
+        function _downloadCollage(uri, name) {
+            var link = document.createElement("a");
+            link.download = name;
+            link.href = uri;
+            link.click();
         }
 
         function onclick(event, element, elementType) {
             // bind custom messages/events
             switch (elementType) {
                 case "collage-element":
-                    _selectElement(element);
+                    _selectElement($(element));
                     break;
                 case "save":
-                    html2canvas($drawArea, {
-                        onrendered: function(canvas) {
-                            downloadCanvas(element, canvas, 'test.png');
-                        }
-                    })
+                    _saveCollage()
                 default:
-                    _removeSelection(element);
+                    _removeSelection();
                     break
             }
         }
