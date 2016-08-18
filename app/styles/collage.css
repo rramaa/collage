@@ -32,7 +32,6 @@ body {
     background: #fff;
     z-index: 1000;
     border-top: 2px solid #454545;
-
 }
 
 .btn {
@@ -45,15 +44,25 @@ body {
     text-align: center;
     text-decoration: none;
     display: block;
+}
+
+.upload-btn input {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
     cursor: pointer;
 }
 
+.save-btn,
 .upload-btn {
     bottom: 0px;
-}
-
-.save-btn {
-    bottom: 0px;
+    position: relative;
+    cursor: pointer;
 }
 
 .draw-area {
@@ -76,12 +85,12 @@ body {
     background: #fff;
     z-index: 1000000000;
     border-top: 2px solid #454545;
-
 }
 
 .thumbnail .thumb-wrap {
     padding-right: 5px;
     vertical-align: top;
+    overflow: hidden;
 }
 
 .thumb-wrap {

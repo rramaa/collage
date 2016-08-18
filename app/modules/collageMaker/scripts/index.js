@@ -5,8 +5,7 @@ define([
     'modules/collageMaker/scripts/services/collageService'
 ], (template, config) => {
     Box.Application.addModule('CollageMaker', (context) => {
-        var messages = [],
-            behaviors = [],
+        var messages = ['CollageMaker_File_Uploaded'],
             $moduleEl,
             $drawArea,
             $thumbnails,
@@ -95,7 +94,9 @@ define([
 
         function _keyuphandler(event) {
             if (event.which == 8) {
-                _recycleImage()
+                let $item = $('.' + config.classes.selected, $drawArea).closest(config.selector["DRAG"]),
+                    imageUrl = $item.remove().find('img').attr('src');
+                _addThumbnailImage(imageUrl)
             }
         }
 
@@ -134,37 +135,17 @@ define([
             el.addClass(config.classes.selected).focus();
         }
 
-        function _recycleImage() {
-            let $item = $('.' + config.classes.selected, $drawArea).closest(config.selector["DRAG"]);
-            $item.fadeOut(function() {
-                let imageUrl = $item.remove().find('img').attr('src'),
-                    clone = $('#clone_element').clone();
+        function _addThumbnailImage(imageUrl) {
+                let clone = $('#clone_element', $moduleEl).clone();
                 clone.removeClass(config.classes.hide).removeAttr('id').find('img').attr("src", imageUrl);
                 clone.appendTo($thumbnails).fadeIn();
                 _bindUIEvent('drag', clone, uiconfig.drag.thumbnail);
-            });
         }
 
         function _initializeCollage() {
             _drawHTML();
             _initializeVariables();
             _bindEvents();
-        }
-
-        function init() {
-            $moduleEl = $(context.getElement());
-            _initializeCollage();
-            _bindKeyEvent();
-        }
-
-        function destroy() {
-            _unbindKeyEvent();
-        }
-
-        function onmessage(name, data) {
-            switch (name) {
-
-            }
         }
 
         function hackForBugInLibrary(add) {
@@ -198,8 +179,25 @@ define([
             link.click();
         }
 
+        function init() {
+            $moduleEl = $(context.getElement());
+            _initializeCollage();
+            _bindKeyEvent();
+        }
+
+        function destroy() {
+            _unbindKeyEvent();
+        }
+
+        function onmessage(name, data) {
+            switch (name) {
+                case 'CollageMaker_File_Uploaded':
+                    _addThumbnailImage(data.url);
+                    break;
+            }
+        }
+
         function onclick(event, element, elementType) {
-            // bind custom messages/events
             switch (elementType) {
                 case "collage-element":
                     _selectElement($(element));
@@ -208,16 +206,24 @@ define([
                     _saveCollage()
                 default:
                     _removeSelection();
-                    break
+                    break;
+            }
+        }
+
+        function onchange(event, element, elementType) {
+            switch (elementType) {
+                case "upload":
+                    CollageService.uploadImage(element.files);
+                    break;
             }
         }
 
         return {
             init,
             messages,
-            behaviors,
             onmessage,
             onclick,
+            onchange,
             destroy
         };
     });

@@ -3,20 +3,22 @@
 <div class="thumbnail" data-tumbnails data-type="thumbnails">
     {{~it :value:index}}
     <div data-drag class="thumb-wrap">
-        <div data-resize data-rotate class="thumb-wrap-inner"  >
-                <img class="content-image" src="{{=value.url}}" />
-                <div class="line"></div>
+        <div data-resize data-rotate class="thumb-wrap-inner">
+            <img class="content-image" src="{{=value.url}}" />
+            <div class="line"></div>
         </div>
     </div>
     {{~}}
 </div>
 <div class="buttons">
-    <a class="save-btn btn" data-type="upload">Upload</a>
-    <a class="upload-btn btn" data-type="save" download="collage.png">Save</a>
+    <div class="upload-btn btn">
+        <input data-type="upload" type="file" multiple accept="image/*">Upload</div>
+    <a class="save-btn btn" data-type="save" download="collage.png">Save</a>
 </div>
 <!-- </div> -->
 <div data-drag class="thumb-wrap hidden" id="clone_element">
-    <div data-resize data-rotate>
-            <img class="content-image" src="" style="display:inline-block" />
+    <div data-resize data-rotate class="thumb-wrap-inner">
+        <img class="content-image" src="" />
+        <div class="line"></div>
     </div>
 </div>
