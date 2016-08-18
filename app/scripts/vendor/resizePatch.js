@@ -134,10 +134,10 @@ $(document).ready(function(){
 		var _sin = Math.sin(angle_rad);
 
 		//patch: calculate the corect mouse offset for a more natural feel
-		ndx = dx * _cos + dy * _sin;
-		ndy = dy * _cos - dx * _sin;
-		dx = ndx;
-		dy = ndy;
+		var ndx = dx * _cos + dy * _sin;
+		var ndy = dy * _cos - dx * _sin;
+		var dx = ndx;
+		var dy = ndy;
 
 		// Calculate the attrs that will be change
 		data = trigger.apply(this, [event, dx, dy]);
